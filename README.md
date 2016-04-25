@@ -9,4 +9,4 @@ Structure:
 
 Language used:
   1. Mobile App: Android - Java
-  2. Server and database: Java with Mongodb
+  2. [Server and database: Java with Mongodb](https://docs.mongodb.org/getting-started/java/client/)
