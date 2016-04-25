@@ -4,9 +4,9 @@ Suggestion for implementation:
   2. Try to do as many peer review as possible
 
 Structure:
-  1. Server
+  1. Server & database
   2. Client (Mobile App)
 
 Language used:
   1. Mobile App: Android - Java
-  2. Server: TBD
+  2. Server and database: Java with Mongodb
