@@ -8,5 +8,5 @@ Structure:
   2. Client (Mobile App)
 
 Language used:
-  1. Mobile App: Android - Java
+  1. [Mobile App: Android - Java](https://developer.android.com/training/index.html)
   2. [Server and database: Java with Mongodb](https://docs.mongodb.org/getting-started/java/client/)
