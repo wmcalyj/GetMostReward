@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">GetMostReward</string>
     <string name="title_activity_maps">Map</string>
+    <string name="server_client_id">739803872503-ehjs39hhubkng496nnu094fuloka53pe.apps.googleusercontent.com</string>
 </resources>

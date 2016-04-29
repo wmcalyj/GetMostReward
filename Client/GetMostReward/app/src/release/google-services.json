@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "739803872503",
+    "project_id": "infra-treat-129508"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:739803872503:android:df59d58a6c0c565c",
+        "android_client_info": {
+          "package_name": "nu.getmostreward"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "739803872503-6grkci0rpgr410rfqfo2df4878k2gq69.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "nu.getmostreward",
+            "certificate_hash": "CEE130E581E76BE8B5867AE909B2CCB0C8A87E92"
+          }
+        },
+        {
+          "client_id": "739803872503-ehjs39hhubkng496nnu094fuloka53pe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAOR3xDdg549vBtzSjIUcuSsvo0TToFsk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
