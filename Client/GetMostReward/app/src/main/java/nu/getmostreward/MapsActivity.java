@@ -38,6 +38,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+// Hello world
+
 // Useful link for categories
 // https://developers.google.com/android/reference/com/google/android/gms/location/places/Place
 // #constant-summary
