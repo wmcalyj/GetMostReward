@@ -12,6 +12,8 @@ import com.google.api.server.spi.config.ApiNamespace;
 
 import javax.inject.Named;
 
+import nu.iot.getmostreward.server.service.DataService;
+
 /** An endpoint class we are exposing */
 @Api(
   name = "myApi",
@@ -27,6 +29,8 @@ public class MyEndpoint {
     /** A simple endpoint method that takes a name and says Hi back */
     @ApiMethod(name = "sayHi")
     public MyBean sayHi(@Named("name") String name) {
+        CreditCard cc = new CreditCard("Chase Freedom", "Chase Freedom", 1.5);
+        DataService.saveNewCreditCard(cc);
         MyBean response = new MyBean();
         response.setData("Hi, " + name);
 
