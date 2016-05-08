@@ -1,14 +1,14 @@
 package nu.getmostreward;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.util.Pair;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -24,19 +24,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import nu.getmostreward.service.PlaceService;
+import nu.getmostreward.service.EndpointsAsyncTask;
 
 // Useful link for categories
 // https://developers.google.com/android/reference/com/google/android/gms/location/places/Place
@@ -63,6 +52,7 @@ public class MapsActivity extends FragmentActivity implements
 
         mapFrag = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFrag.getMapAsync(this);
+        new EndpointsAsyncTask().execute(new Pair<Context, String>(this, "Manfred"));
     }
 
     @Override
@@ -98,11 +88,15 @@ public class MapsActivity extends FragmentActivity implements
         mGoogleApiClient.connect();
     }
 
-    public StringBuilder sbMethod(Location currentLocation) {
+    public StringBuilder searchPlaces(Location currentLocation) {
         //current location
         double mLatitude = currentLocation.getLatitude();
         double mLongitude = currentLocation.getLongitude();
 
+        // Sample:
+        // https://maps.googleapis
+        // .com/maps/api/place/nearbysearch/json?key=AIzaSyDPrwN1zh4t0XLNCpth8D4H-KpB4aSzX1M
+        // &location=42.001302,-87.657324&radius=10
         StringBuilder sb = new StringBuilder("https://maps.googleapis" +
                 ".com/maps/api/place/nearbysearch/json?");
         sb.append("location=" + mLatitude + "," + mLongitude);
@@ -175,8 +169,8 @@ public class MapsActivity extends FragmentActivity implements
         mGoogleMap.animateCamera(CameraUpdateFactory.zoomTo(11));
 
         //query places with current location
-        StringBuilder sbValue = new StringBuilder(sbMethod(location));
-        PlacesTask placesTask = new PlacesTask();
+        StringBuilder sbValue = new StringBuilder(searchPlaces(location));
+        PlaceService placesTask = new PlaceService(mGoogleMap);
         placesTask.execute(sbValue.toString());
 
         if (mGoogleApiClient != null) {
@@ -184,7 +178,7 @@ public class MapsActivity extends FragmentActivity implements
         }
     }
 
-    private String downloadUrl(String strUrl) throws IOException {
+   /* private String downloadUrl(String strUrl) throws IOException {
         String data = "";
         InputStream iStream = null;
         HttpURLConnection urlConnection = null;
@@ -325,21 +319,21 @@ public class MapsActivity extends FragmentActivity implements
 
     public class Place_JSON {
 
-        /**
-         * Receives a JSONObject and returns a list
-         */
+        *//**
+     * Receives a JSONObject and returns a list
+     *//*
         public List<HashMap<String, String>> parse(JSONObject jObject) {
 
             JSONArray jPlaces = null;
             try {
-                /** Retrieves all the elements in the 'places' array */
+                *//** Retrieves all the elements in the 'places' array *//*
                 jPlaces = jObject.getJSONArray("results");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            /** Invoking getPlaces with the array of json object
-             * where each json object represent a place
-             */
+            *//** Invoking getPlaces with the array of json object
+     * where each json object represent a place
+     *//*
             return getPlaces(jPlaces);
         }
 
@@ -348,10 +342,10 @@ public class MapsActivity extends FragmentActivity implements
             List<HashMap<String, String>> placesList = new ArrayList<HashMap<String, String>>();
             HashMap<String, String> place = null;
 
-            /** Taking each place, parses and adds to list object */
+            *//** Taking each place, parses and adds to list object *//*
             for (int i = 0; i < placesCount; i++) {
                 try {
-                    /** Call getPlace with place JSON object to parse the place */
+                    *//** Call getPlace with place JSON object to parse the place *//*
                     place = getPlace((JSONObject) jPlaces.get(i));
                     placesList.add(place);
                 } catch (JSONException e) {
@@ -361,9 +355,9 @@ public class MapsActivity extends FragmentActivity implements
             return placesList;
         }
 
-        /**
-         * Parsing the Place JSON object
-         */
+        *//**
+     * Parsing the Place JSON object
+     *//*
         private HashMap<String, String> getPlace(JSONObject jPlace) {
 
             HashMap<String, String> place = new HashMap<String, String>();
@@ -401,7 +395,7 @@ public class MapsActivity extends FragmentActivity implements
             }
             return place;
         }
-    }
+    }*/
 
 
 }
