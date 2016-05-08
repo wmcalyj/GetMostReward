@@ -27,6 +27,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import nu.getmostreward.service.PlaceService;
 import nu.getmostreward.service.EndpointsAsyncTask;
 
+// Hello world
+
 // Useful link for categories
 // https://developers.google.com/android/reference/com/google/android/gms/location/places/Place
 // #constant-summary
