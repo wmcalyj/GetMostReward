@@ -12,27 +12,34 @@ import com.google.api.server.spi.config.ApiNamespace;
 
 import javax.inject.Named;
 
+import nu.iot.getmostreward.server.data.CreditCard;
+import nu.iot.getmostreward.server.data.Reward;
 import nu.iot.getmostreward.server.service.DataService;
 
-/** An endpoint class we are exposing */
+/**
+ * An endpoint class we are exposing
+ */
 @Api(
-  name = "myApi",
-  version = "v1",
-  namespace = @ApiNamespace(
-    ownerDomain = "server.getmostreward.iot.nu",
-    ownerName = "server.getmostreward.iot.nu",
-    packagePath=""
-  )
+        name = "myApi",
+        version = "v1",
+        namespace = @ApiNamespace(
+                ownerDomain = "server.getmostreward.iot.nu",
+                ownerName = "server.getmostreward.iot.nu",
+                packagePath = ""
+        )
 )
 public class MyEndpoint {
 
-    /** A simple endpoint method that takes a name and says Hi back */
+    /**
+     * A simple endpoint method that takes a name and says Hi back
+     */
     @ApiMethod(name = "sayHi")
     public MyBean sayHi(@Named("name") String name) {
-        CreditCard cc = new CreditCard("Chase Freedom", "Chase Freedom", 1.5);
-        DataService.saveNewCreditCard(cc);
+//        CreditCard cc = new CreditCard("Chase Freedom", "Chase Freedom", new Reward(1.5));
+//        DataService.saveNewCreditCard(cc);
         MyBean response = new MyBean();
-        response.setData("Hi, " + name);
+        String cc = DataService.getCreditCardNameWithRewardForType(null).toString();
+        response.setData(cc);
 
         return response;
     }
