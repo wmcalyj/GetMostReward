@@ -3,9 +3,6 @@ package nu.iot.getmostreward.server.data;
 import java.util.HashMap;
 import java.util.Map;
 
-import nu.iot.getmostreward.server.data.Category;
-import nu.iot.getmostreward.server.data.Reward;
-
 /**
  * Created by mengchaowang on 5/8/16.
  */
@@ -25,8 +22,10 @@ public class CreditCard {
         this.ccName = ccName;
         this.ccDescription = ccDescription;
         this.defaultReward = defaultReward;
-        this.highestCategory = new Category(CategoryEnum.EVERYTHING);
+        this.highestCategory = new Category(CategoryEnum.everything);
         this.highestReward = defaultReward;
+        this.ccReward = new HashMap<Category, Reward>();
+        ccReward.put(new Category(CategoryEnum.everything), defaultReward);
     }
 
     public String getName() {
@@ -55,6 +54,10 @@ public class CreditCard {
         }
         ccReward.put(category, reward);
         updateCCInfo();
+    }
+
+    public void addRewardCategory(CategoryEnum categoryEnum, Reward reward) {
+        addRewardCategory(new Category(categoryEnum), reward);
     }
 
 

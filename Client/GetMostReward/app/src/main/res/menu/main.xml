@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="nu.getmostreward.MapsActivity">
+    <item
+        android:id="@+id/sign_in"
+        android:orderInCategory="100"
+        android:title="@string/signin"
+        />
+    <item
+        android:id="@+id/range"
+        android:orderInCategory="100"
+        android:title="@string/range"
+        />
+</menu>

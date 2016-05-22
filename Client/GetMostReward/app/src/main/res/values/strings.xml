@@ -2,4 +2,12 @@
     <string name="app_name">GetMostReward</string>
     <string name="title_activity_maps">Map</string>
     <string name="server_client_id">739803872503-ehjs39hhubkng496nnu094fuloka53pe.apps.googleusercontent.com</string>
+    <string name="test">Test</string>
+    <string name="shortRange">500 meters (1640 feet)</string>
+    <string name="mediumRange">1000 meters (3280 feet)</string>
+    <string name="longRange">5000 meters (3.1 miles)</string>
+    <string name="signin">Sign in/up</string>
+    <string name="range">Select Range</string>
+    <string name="range_selection_title">Please choose point of interests distance</string>
+    <string name="range_selection_ok">OK</string>
 </resources>

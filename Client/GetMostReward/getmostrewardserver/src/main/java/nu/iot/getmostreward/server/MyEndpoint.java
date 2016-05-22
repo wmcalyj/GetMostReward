@@ -35,11 +35,12 @@ public class MyEndpoint {
      */
     @ApiMethod(name = "sayHi")
     public MyBean sayHi(@Named("name") String name) {
-//        CreditCard cc = new CreditCard("Chase Freedom", "Chase Freedom", new Reward(1.5));
-//        DataService.saveNewCreditCard(cc);
+        CreditCard cc = new CreditCard("Chase Freedom Unlimited", "Chase Freedom Unlimited", new
+                Reward(1.5));
+        DataService.saveNewCreditCard(cc);
         MyBean response = new MyBean();
-        String cc = DataService.getCreditCardNameWithRewardForType(null).toString();
-        response.setData(cc);
+//        String cc = DataService.getCreditCardNameWithRewardForType(null).toString();
+//        response.setData(cc);
 
         return response;
     }
