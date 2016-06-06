@@ -21,31 +21,30 @@ import nu.iot.getmostreward.server.myApi.MyApi;
 /**
  * Created by mengchaowang on 5/7/16.
  */
-public class EndpointsAsyncTask extends AsyncTask<Pair<Context, Set<String>>, Void, String> {
+public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
     private static MyApi myApiService = null;
     private Context context;
 
     @Override
-    protected String doInBackground(Pair<Context, Set<String>>... params) {
+    protected String doInBackground(Pair<Context, String>... params) {
         if (myApiService == null) {  // Only do this once
             // end options for devappserver
-            MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null)
+            MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(), new
+                    AndroidJsonFactory(), null)
                     .setRootUrl("https://infra-treat-129508.appspot.com/_ah/api/");
 
             myApiService = builder.build();
         }
 
         context = params[0].first;
-        Set<String> types = params[0].second;
-        if(types == null || types.isEmpty()){
-            types.add("Everything");
+        String types = params[0].second;
+        if (types == null || types.isEmpty()) {
+            types = "everything";
         }
-        List<String> typeList = new ArrayList<String>(types);
-        for(String s : typeList){
-            Log.d("Selected Type in List:", s);
-        }
+        Log.d("Selected Type in List ", types);
+
         try {
-            return myApiService.findCreditCard(typeList).execute().getData();
+            return myApiService.findCreditCard(types).execute().getData();
         } catch (IOException e) {
             return e.getMessage();
         }

@@ -10,6 +10,9 @@ import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 import javax.inject.Named;
@@ -38,10 +41,11 @@ public class MyEndpoint {
      * A simple endpoint method that takes a name and says Hi back
      */
     @ApiMethod(name = "findCreditCard")
-    public MyBean findCreditCard(@Named("locationTypes") Set<String> types) {
+    public MyBean findCreditCard(@Named("locationTypes") String type) {
         MyBean response = new MyBean();
         String cc;
-        cc = DataService.getCreditCardNameWithRewardForType(types).toString();
+        String[] types = type.split(",");
+        cc = DataService.getCreditCardNameWithRewardForType(new ArrayList<String>(Arrays.asList(types))).toString();
         response.setData(cc);
         return response;
     }

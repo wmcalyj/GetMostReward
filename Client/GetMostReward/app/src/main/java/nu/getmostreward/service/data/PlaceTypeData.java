@@ -39,7 +39,25 @@ public class PlaceTypeData {
         if(types == null){
             types = new HashSet<String>();
         }
-        types.addAll(type);
+        if(type.contains("movie_theater")){
+            types.add("movie_theater");
+        }
+        if(type.contains("restaurant")){
+            types.add("restaurant");
+        }
+        if(type.contains("car_rental")){
+            types.add("car_rental");
+        }
+        if(type.contains("department_store")){
+            types.add("department_store");
+        }
+        if(type.contains("gas_station")){
+            types.add("gas_station");
+        }
+        if(type.contains("grocery_or_supermarket")){
+            types.add("grocery_or_supermarket");
+        }
+//        types.addAll(type);
         data.put(pos, types);
     }
 

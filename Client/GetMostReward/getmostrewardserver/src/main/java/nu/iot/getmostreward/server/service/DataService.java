@@ -9,6 +9,7 @@ import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 
 import java.io.Console;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -42,7 +43,7 @@ public class DataService {
                 creditcard.setProperty("Approved", false);
                 datastore.put(creditcard);
             }
-        }else {
+        } else {
             Entity creditcard = new Entity(DatastoreEntity.CREDITCARD);
             creditcard.setProperty("DefaultReward", cc.getDefaultReward().getReward());
             creditcard.setProperty("CreditCardName", cc.getName());
@@ -52,39 +53,58 @@ public class DataService {
         }
     }
 
-    public static CreditCardReward getCreditCardNameWithRewardForType(Set<String> types) {
+    public static CreditCardReward getCreditCardNameWithRewardForType(List<String> types) {
         // https://cloud.google.com/appengine/docs/java/datastore/retrieving-query-results
 
-        if(types == null || types.size() == 0 || types.isEmpty()){
-            return getBestDefaultCreditCardReward();
+        CreditCardReward bestDefault = getBestDefaultCreditCardReward();
+        if (types == null || types.size() == 0 || types.isEmpty()) {
+            return bestDefault;
         }
-        Query.Filter typeFilter = new Query.FilterPredicate("Category", Query.FilterOperator.IN, types);
-        Query.Filter approvedFilter = new Query.FilterPredicate("Approved", Query.FilterOperator.EQUAL, true);
-        Query.Filter filter = Query.CompositeFilterOperator.and(typeFilter, approvedFilter);
-
+        List<Query.Filter> typeFilters = new ArrayList<Query.Filter>();
+        for (String type : types) {
+            typeFilters.add(new Query.FilterPredicate("Category", Query.FilterOperator.EQUAL,
+                    type));
+        }
+        Query.Filter approvedFilter = new Query.FilterPredicate("Approved", Query.FilterOperator
+                .EQUAL, true);
+        Query.Filter filter;
+        if (types.size() == 1) {
+            filter = Query.CompositeFilterOperator.and(typeFilters.get(0), approvedFilter);
+        } else {
+            filter = Query.CompositeFilterOperator.or(typeFilters.get(0), typeFilters.get(1));
+            for (int i = 2; i < typeFilters.size(); i++) {
+                filter = Query.CompositeFilterOperator.or(filter, typeFilters.get(i));
+            }
+            filter = Query.CompositeFilterOperator.and(filter, approvedFilter);
+        }
         Query q = new Query(DatastoreEntity.CREDITCARD).setFilter(filter);
         q.addSort("Rewards", Query.SortDirection.DESCENDING);
         PreparedQuery pq = datastore.prepare(q);
         List<Entity> results = pq.asList(FetchOptions.Builder.withLimit(1));
-        if(results == null || results.isEmpty() || results.size() < 1){
-            return getBestDefaultCreditCardReward();
-        }else{
+        if (results == null || results.isEmpty() || results.size() < 1) {
+            return bestDefault;
+        } else {
             Entity result = results.get(0);
-            return new CreditCardReward((String) (result.getProperty("CreditCardName")), (double) result.getProperty("Rewards"), (String) result.getProperty("Category"));
+            CreditCardReward bestCategory = new CreditCardReward((String) (result.getProperty
+                    ("CreditCardName")), (double)
+                    result.getProperty("Rewards"), (String) result.getProperty("Category"));
+            return bestCategory.getReward() > bestDefault.getReward() ? bestCategory : bestDefault;
         }
     }
 
-    public static CreditCardReward getBestDefaultCreditCardReward(){
-        Query.Filter approvedFilter = new Query.FilterPredicate("Approved", Query.FilterOperator.EQUAL, true);
+    public static CreditCardReward getBestDefaultCreditCardReward() {
+        Query.Filter approvedFilter = new Query.FilterPredicate("Approved", Query.FilterOperator
+                .EQUAL, true);
         Query q = new Query(DatastoreEntity.CREDITCARD).setFilter(approvedFilter);
         q.addSort("DefaultReward", Query.SortDirection.DESCENDING);
         PreparedQuery pq = datastore.prepare(q);
         List<Entity> results = pq.asList(FetchOptions.Builder.withLimit(1));
-        if(results == null || results.isEmpty() || results.size() < 1){
+        if (results == null || results.isEmpty() || results.size() < 1) {
             return null;
-        }else{
+        } else {
             Entity result = results.get(0);
-            return new CreditCardReward((String) (result.getProperty("CreditCardName")), (double) result.getProperty("DefaultReward"), "Everything");
+            return new CreditCardReward((String) (result.getProperty("CreditCardName")), (double)
+                    result.getProperty("DefaultReward"), "Everything");
         }
 
 
