@@ -10,8 +10,11 @@ import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
 
+import java.util.Set;
+
 import javax.inject.Named;
 
+import nu.iot.getmostreward.server.data.CategoryEnum;
 import nu.iot.getmostreward.server.data.CreditCard;
 import nu.iot.getmostreward.server.data.Reward;
 import nu.iot.getmostreward.server.service.DataService;
@@ -30,18 +33,40 @@ import nu.iot.getmostreward.server.service.DataService;
 )
 public class MyEndpoint {
 
+
     /**
      * A simple endpoint method that takes a name and says Hi back
      */
-    @ApiMethod(name = "sayHi")
-    public MyBean sayHi(@Named("name") String name) {
-        CreditCard cc = new CreditCard("Chase Freedom Unlimited", "Chase Freedom Unlimited", new
+    @ApiMethod(name = "findCreditCard")
+    public MyBean findCreditCard(@Named("locationTypes") Set<String> types) {
+        MyBean response = new MyBean();
+        String cc;
+        cc = DataService.getCreditCardNameWithRewardForType(types).toString();
+        response.setData(cc);
+        return response;
+    }
+
+    @ApiMethod(name = "saveCC")
+    public MyBean saveCC(@Named("name") String name) {
+        CreditCard cc = new CreditCard("Discover It", "Discover It", new
+                Reward(1));
+        cc.addRewardCategory(CategoryEnum.movie_theater, new Reward(5));
+        cc.addRewardCategory(CategoryEnum.gas_station, new Reward(5));
+        DataService.saveNewCreditCard(cc);
+        cc = new CreditCard("Discover It Miles", "Discover It Miles", new
                 Reward(1.5));
         DataService.saveNewCreditCard(cc);
+        cc = new CreditCard("American Express BlueCash Everyday", "American Express BlueCash Everyday", new
+                Reward(1));
+        cc.addRewardCategory(CategoryEnum.gas_station, new Reward(2));
+        cc.addRewardCategory(CategoryEnum.grocery_or_supermarket, new Reward(3));
+        DataService.saveNewCreditCard(cc);
+        cc = new CreditCard("Chase Freedom Unlimited", "Chase Freedom Unlimited", new
+                Reward(1.5));
+        DataService.saveNewCreditCard(cc);
+        cc = new CreditCard("Citi Double Cash", "Citi Double Cash", new Reward(2));
         MyBean response = new MyBean();
-//        String cc = DataService.getCreditCardNameWithRewardForType(null).toString();
-//        response.setData(cc);
-
+        response.setData("Saved Successfully");
         return response;
     }
 

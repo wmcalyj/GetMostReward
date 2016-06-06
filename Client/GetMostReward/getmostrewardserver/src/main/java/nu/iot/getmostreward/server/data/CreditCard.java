@@ -10,8 +10,6 @@ public class CreditCard {
     private String ccName;
     private String ccDescription;
     private Map<Category, Reward> ccReward;
-    private Reward highestReward;
-    private Category highestCategory;
     private Reward defaultReward;
 
     private CreditCard() {
@@ -22,8 +20,6 @@ public class CreditCard {
         this.ccName = ccName;
         this.ccDescription = ccDescription;
         this.defaultReward = defaultReward;
-        this.highestCategory = new Category(CategoryEnum.everything);
-        this.highestReward = defaultReward;
         this.ccReward = new HashMap<Category, Reward>();
         ccReward.put(new Category(CategoryEnum.everything), defaultReward);
     }
@@ -40,20 +36,11 @@ public class CreditCard {
         return this.ccReward;
     }
 
-    public Category getHighestCategory() {
-        return this.highestCategory;
-    }
-
-    public Reward getHighestReward() {
-        return this.highestReward;
-    }
-
     public void addRewardCategory(Category category, Reward reward) {
         if (this.ccReward == null) {
             ccReward = new HashMap<Category, Reward>();
         }
         ccReward.put(category, reward);
-        updateCCInfo();
     }
 
     public void addRewardCategory(CategoryEnum categoryEnum, Reward reward) {
@@ -65,12 +52,4 @@ public class CreditCard {
         return defaultReward;
     }
 
-    private void updateCCInfo() {
-        for (Map.Entry<Category, Reward> entry : ccReward.entrySet()) {
-            if (entry.getValue().getReward() > this.highestReward.getReward()) {
-                this.highestCategory = entry.getKey();
-                this.highestReward = entry.getValue();
-            }
-        }
-    }
 }

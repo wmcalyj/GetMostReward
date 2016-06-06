@@ -2,6 +2,7 @@ package nu.getmostreward.service;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.util.Pair;
 import android.widget.Toast;
 
@@ -11,31 +12,22 @@ import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
 import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 import nu.iot.getmostreward.server.myApi.MyApi;
 
 /**
  * Created by mengchaowang on 5/7/16.
  */
-public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
+public class EndpointsAsyncTask extends AsyncTask<Pair<Context, Set<String>>, Void, String> {
     private static MyApi myApiService = null;
     private Context context;
 
     @Override
-    protected String doInBackground(Pair<Context, String>... params) {
+    protected String doInBackground(Pair<Context, Set<String>>... params) {
         if (myApiService == null) {  // Only do this once
-//            MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(), new
-//                    AndroidJsonFactory(), null)
-//                    .setRootUrl("http://10.0.2.2:8080/_ah/api/") // 10.0.2.2 is localhost's IP
-//                    // address in Android emulator
-//                    .setGoogleClientRequestInitializer(new GoogleClientRequestInitializer() {
-//                        @Override
-//                        public void initialize(AbstractGoogleClientRequest
-//                                                       abstractGoogleClientRequest) throws
-//                                IOException {
-//                            abstractGoogleClientRequest.setDisableGZipContent(true);
-//                        }
-//                    });
             // end options for devappserver
             MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null)
                     .setRootUrl("https://infra-treat-129508.appspot.com/_ah/api/");
@@ -44,9 +36,16 @@ public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, S
         }
 
         context = params[0].first;
-        String name = params[0].second;
+        Set<String> types = params[0].second;
+        if(types == null || types.isEmpty()){
+            types.add("Everything");
+        }
+        List<String> typeList = new ArrayList<String>(types);
+        for(String s : typeList){
+            Log.d("Selected Type in List:", s);
+        }
         try {
-            return myApiService.sayHi(name).execute().getData();
+            return myApiService.findCreditCard(typeList).execute().getData();
         } catch (IOException e) {
             return e.getMessage();
         }

@@ -1,6 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:tools="http://schemas.android.com/tools"
-      tools:context="nu.getmostreward.MapsActivity">
+      tools:context="nu.getmostreward.MasterActivity">
     <item
         android:id="@+id/sign_in"
         android:orderInCategory="100"
@@ -10,5 +10,10 @@
         android:id="@+id/range"
         android:orderInCategory="100"
         android:title="@string/range"
+        />
+    <item
+        android:id="@+id/typeSelection"
+        android:orderInCategory="100"
+        android:title="@string/typeSelection"
         />
 </menu>

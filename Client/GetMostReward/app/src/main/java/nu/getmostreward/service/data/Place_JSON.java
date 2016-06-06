@@ -6,7 +6,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by mengchaowang on 5/2/16.
@@ -60,6 +62,7 @@ public class Place_JSON {
         String latitude = "";
         String longitude = "";
         String reference = "";
+        StringBuilder types = new StringBuilder();
 
         try {
             // Extracting Place name, if available
@@ -77,12 +80,17 @@ public class Place_JSON {
             longitude = jPlace.getJSONObject("geometry").getJSONObject("location").getString
                     ("lng");
             reference = jPlace.getString("reference");
-
+            JSONArray typesArray = jPlace.getJSONArray("types");
+            for(int i = 0, j = typesArray.length(); i < j; i++){
+                types.append(typesArray.get(i)).append(",");
+            }
+            types.deleteCharAt(types.lastIndexOf(","));
             place.put("place_name", placeName);
             place.put("vicinity", vicinity);
             place.put("lat", latitude);
             place.put("lng", longitude);
             place.put("reference", reference);
+            place.put("types", types.toString());
 
         } catch (JSONException e) {
             e.printStackTrace();

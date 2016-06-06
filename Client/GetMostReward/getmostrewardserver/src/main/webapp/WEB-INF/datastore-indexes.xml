@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datastore-indexes
+    autoGenerate="true">
+    <datastore-index kind="CreditCard" ancestor="false" source="manual">
+        <property name="Approved" direction="asc"/>
+        <property name="DefaultReward" direction="desc"/>
+    </datastore-index>
+    <datastore-index kind="CreditCard" ancestor="false" source="manual">
+        <property name="Approved" direction="asc"/>
+        <property name="Category" direction="asc"/>
+        <property name="Rewards" direction="desc"/>
+    </datastore-index>
+</datastore-indexes>

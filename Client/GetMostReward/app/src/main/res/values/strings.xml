@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">GetMostReward</string>
+    <string name="app_name">Smart Choice For Credit Card</string>
     <string name="title_activity_maps">Map</string>
     <string name="server_client_id">739803872503-ehjs39hhubkng496nnu094fuloka53pe.apps.googleusercontent.com</string>
     <string name="test">Test</string>
@@ -10,4 +10,22 @@
     <string name="range">Select Range</string>
     <string name="range_selection_title">Please choose point of interests distance</string>
     <string name="range_selection_ok">OK</string>
+    <string name="type_options">Choose types</string>
+    <string name="Bar">Bar</string>
+    <string name="Restaurant">Restaurant</string>
+    <string name="Cafe">Cafe</string>
+    <string name="confirm">Confirm</string>
+    <string name="boa">Bank of American</string>
+    <string name="exit">Exit</string>
+    <string name="discovery">Discovery</string>
+    <string name="card_hint">Add New Card</string>
+    <string name="reward">Type Your Default Reward on This Card</string>
+    <string name="category">Category</string>
+    <string name="reward1">Reward</string>
+    <string name="typeSelection">Select Type(s)</string>
+    <string name="movie_theater">Movie Theater</string>
+    <string name="car_rental">Car Rental</string>
+    <string name="department_store">Department Store</string>
+    <string name="gas_station">Gas Station</string>
+    <string name="grocery_or_supermarket">Grocery or Supermarket</string>
 </resources>

@@ -45,7 +45,8 @@ public enum CategoryEnum {
     gym("gym"),
     hair_care("hair_car"),
     hardware_store("hardware_store"),
-    home_goods_store("home_goods_store");
+    home_goods_store("home_goods_store"),
+    restaurant("restaurant");
 
     private String name;
 

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+
+
+    <EditText
+        android:id="@+id/card_type"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/card_hint"
+        android:inputType="textEmailAddress" />
+    <EditText
+        android:id="@+id/reward"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/card_type"
+        android:hint="@string/reward"
+        android:inputType="textEmailAddress" />
+    <EditText
+        android:id="@+id/category1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/reward"
+        android:hint="@string/category"
+        android:inputType="textEmailAddress" />
+    <EditText
+        android:id="@+id/reward1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/reward"
+        android:layout_toRightOf="@id/category1"
+        android:hint="@string/reward1"
+        android:inputType="textEmailAddress" />
+    <EditText
+        android:id="@+id/category2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/category1"
+        android:hint="@string/category"
+        android:inputType="textEmailAddress" />
+    <EditText
+        android:id="@+id/reward2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/category1"
+        android:layout_toRightOf="@id/category2"
+        android:hint="@string/reward1"
+        android:inputType="textEmailAddress" />
+    <EditText
+        android:id="@+id/category3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/category2"
+        android:hint="@string/category"
+        android:inputType="textEmailAddress" />
+    <EditText
+        android:id="@+id/reward3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/category2"
+        android:layout_toRightOf="@id/category3"
+        android:hint="@string/reward1"
+        android:inputType="textEmailAddress"/>
+
+    <Button android:id="@+id/confirm"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/exit"
+            android:text="@string/confirm"
+            android:onClick="saveOptions"/>
+    <Button android:id="@+id/exit"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="@string/exit" />
+
+</RelativeLayout>

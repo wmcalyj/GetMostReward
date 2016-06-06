@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+
+    <CheckBox
+        android:id="@+id/checkbox_movie_theater"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onCheckboxClicked"
+        android:text="@string/movie_theater" />
+
+    <CheckBox
+        android:id="@+id/checkbox_Restaurant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/checkbox_movie_theater"
+        android:onClick="onCheckboxClicked"
+        android:text="@string/Restaurant" />
+
+    <CheckBox
+        android:id="@+id/checkbox_car_rental"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/checkbox_Restaurant"
+        android:onClick="onCheckboxClicked"
+        android:text="@string/car_rental" />
+
+    <CheckBox
+        android:id="@+id/checkbox_department_store"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/checkbox_car_rental"
+        android:onClick="onCheckboxClicked"
+        android:text="@string/department_store" />
+    <CheckBox
+        android:id="@+id/checkbox_gas_station"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/checkbox_department_store"
+        android:onClick="onCheckboxClicked"
+        android:text="@string/gas_station" />
+    <CheckBox
+        android:id="@+id/checkbox_grocery_or_supermarket"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/checkbox_gas_station"
+        android:onClick="onCheckboxClicked"
+        android:text="@string/grocery_or_supermarket"/>
+
+    <Button android:id="@+id/confirm"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/exit"
+            android:text="@string/confirm"
+            android:onClick="saveOptions"/>
+    <Button android:id="@+id/exit"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="@string/exit" />
+
+</RelativeLayout>

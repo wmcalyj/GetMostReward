@@ -1,8 +1,10 @@
 package nu.getmostreward.service;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.PowerManager;
 import android.util.Log;
+import android.util.Pair;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -25,6 +27,7 @@ import java.net.URLEncoder;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -32,6 +35,7 @@ import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
 
+import nu.getmostreward.service.data.PlaceTypeData;
 import nu.getmostreward.service.data.Place_JSON;
 
 /**
@@ -141,7 +145,6 @@ public class PlaceService extends AsyncTask<String, Integer, String> {
             Log.d("Map", "list size: " + list.size());
             // Clears all the existing markers;
             if (!firstRun) {
-
                 mGoogleMap.clear();
             }
             firstRun = false;
@@ -163,13 +166,14 @@ public class PlaceService extends AsyncTask<String, Integer, String> {
 
                 // Getting name
                 String name = hmPlace.get("place_name");
-
-                Log.d("Map", "place: " + name);
-
                 // Getting vicinity
                 String vicinity = hmPlace.get("vicinity");
-
                 LatLng latLng = new LatLng(lat, lng);
+                // Getting types
+                String typesString = hmPlace.get("types");
+                Log.d("PlaceService", typesString);
+                String[] types = typesString.split(",");
+                PlaceTypeData.addAllPlaceType(latLng, new ArrayList<String>(Arrays.asList(types)));
 
                 // Setting the position for the marker
                 markerOptions.position(latLng);
@@ -178,7 +182,6 @@ public class PlaceService extends AsyncTask<String, Integer, String> {
 
                 markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory
                         .HUE_MAGENTA));
-
                 // Placing a marker on the touched position
                 Marker m = mGoogleMap.addMarker(markerOptions);
 
